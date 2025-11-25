@@ -1,0 +1,8 @@
+SELECT
+    NAME,
+    COUNT(NAME) AS COUNT
+FROM ANIMAL_INS
+WHERE NAME IS NOT NULL # "이때 결과는 이름이 없는 동물은 집계에서 제외" 이 조건은 NULL울 제외하라는 의미
+GROUP BY NAME
+HAVING COUNT(NAME) >= 2 # "동물 이름 중 두 번 이상 쓰인" 해당 조건 필터링하기 위한 HAVING
+ORDER BY NAME;
