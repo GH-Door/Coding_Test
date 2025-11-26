@@ -1,0 +1,11 @@
+SELECT
+    COUNT(FISH_TYPE) AS FISH_COUNT,
+    MAX(LENGTH) AS MAX_LENGTH,
+    FISH_TYPE
+FROM FISH_INFO
+GROUP BY FISH_TYPE # HAVING은 GROUP BY 뒤에 한번만 가능 
+HAVING AVG(CASE # 평균 + CASE 조건
+          WHEN LENGTH <= 10 THEN 10 # 10cm이하의 물고기들은 10cm로 취급
+          ELSE LENGTH
+      END) >= 33 # 평균 길이가 33cm 이상인 물고기들을 종류별로 분류
+ORDER BY FISH_TYPE ASC;
