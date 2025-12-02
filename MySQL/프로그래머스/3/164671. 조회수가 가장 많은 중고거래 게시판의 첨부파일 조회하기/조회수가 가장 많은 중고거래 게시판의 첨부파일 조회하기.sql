@@ -1,0 +1,13 @@
+# 조회수가 가장 높은 중고거래 게시물에 대한 첨부파일 경로를 조회하는 SQL문을 작성
+# 기본적인 파일경로는 /home/grep/src/
+
+SELECT
+    CONCAT("/home/grep/src/", F.BOARD_ID, "/", F.FILE_ID, F.FILE_NAME, F.FILE_EXT) AS FILE_PATH
+FROM USED_GOODS_FILE AS F
+JOIN (
+    SELECT BOARD_ID
+    FROM USED_GOODS_BOARD
+    WHERE VIEWS = (SELECT MAX(VIEWS) FROM USED_GOODS_BOARD)
+) AS B
+    ON F.BOARD_ID = B.BOARD_ID
+ORDER BY F.FILE_ID DESC;
